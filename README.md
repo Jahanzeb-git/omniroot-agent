@@ -78,7 +78,7 @@ If you want to modify the source code:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/agentic-dev-tool.git
+   git clone https://github.com/Jahanzeb-git/omniroot-agent.git
    cd agentic-dev-tool
    ```
 
