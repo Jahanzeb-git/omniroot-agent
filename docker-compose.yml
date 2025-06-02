@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  omniroot:
+    image: jahanzeb833/omniroot-agent:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omniroot-agent
+    privileged: true        # Give the container full capabilities
+    pid: "host"             # Share the host’s PID namespace
+    environment:
+      # Make "~" inside the container point to the host user’s home directory
+      - HOME=/hostroot/home/${USER}
+    volumes:
+      # 1) Mount the host’s entire root filesystem at /hostroot inside the container
+      - "/:/hostroot"
+      # 2) Mount the host’s ~/workspace directory into /workspace in the container
+      - "~/workspace:/workspace"
+    ports:
+      - "5001:5001"   # Expose Flask
+      - "5173:5173"   # Expose Frontend static server
+    stdin_open: true
+    tty: true

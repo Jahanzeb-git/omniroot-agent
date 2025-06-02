@@ -1,0 +1,14 @@
+Flask==3.1.1
+flask-cors==6.0.0
+langchain==0.3.25
+langchain-community==0.3.24
+langchain-core==0.3.59
+langchain-litellm==0.2.1
+langchain-openai==0.3.16
+litellm==1.70.2
+openai==1.75.0
+psutil==7.0.0
+python-dotenv==1.1.0
+requests==2.32.3
+watchdog==6.0.0
+gunicorn==22.0.0
