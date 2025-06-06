@@ -16,7 +16,7 @@
 
 ## 🖼️ Application Preview
 
-[![Omniroot Agent Interface](https://i.postimg.cc/s2JNTxqg/Screenshot-from-2025-06-02-19-32-55.png)](https://postimg.cc/Z9CHRbJG)
+[![Screenshot-from-2025-06-06-17-41-21.png](https://i.postimg.cc/fWPzRCKD/Screenshot-from-2025-06-06-17-41-21.png)](https://postimg.cc/SjWFZW3v)
 
 *Omniroot Agent's integrated development environment featuring VS Code Web IDE, terminal interface, multi-LLM chat, and real-time system monitoring capabilities.*
 
