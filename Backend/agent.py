@@ -146,23 +146,28 @@ tools = [
     Tool(
         name="ShellTool",
         func=shell_tool_function,
-        description="""Execute shell commands with persistent session management.
-    
-    Input format: JSON string with required 'command' field and optional 'timeout' (default 60s) and 'use_sudo' (default false).
-    
-    Examples:
-    - {"command": "ls -la"}
-    - {"command": "ls -la", "timeout": 30}
-    - {"command": "ls /root", "use_sudo": true}
-    
-    Features:
-    - Persistent shell sessions per workflow
-    - Command validation for dangerous operations
-    - Server command detection with background execution warnings
-    - Directory change tracking
-    - Sudo support with elevation
-    - Robust error handling and timeout management
-    """
+        description="""Run shell commands on the host OS with session, sudo, and timeout support.
+
+**Input (JSON):**
+- `command` (str, required): Shell command to run
+- `timeout` (int, optional): Max time in seconds (default: 60)
+- `use_sudo` (bool, optional): Use elevated privileges
+- `session` (str, optional): Session ID ("default", "new", or custom)
+
+**Examples:**
+- Basic: {"command": "ls"}
+- Timeout: {"command": "find .", "timeout": 90}
+- Sudo: {"command": "systemctl restart nginx", "use_sudo": true}
+- New session: {"command": "cd /tmp", "session": "new"}
+- Server: {"command": "python app.py"}
+
+**Output:**
+- `status`: successful | error | blocked | timeout
+- `output`: Command result or error
+- `cwd`: Current working directory
+- `session_id`: Active session
+For List all sessions please Call "list_shell_sessions()" function without any input.
+"""
     ),
     Tool(
         name="EmailTool",
@@ -195,7 +200,7 @@ def start_new_session() -> tuple[str, ConversationSummaryMemory]:
     session_id = str(uuid.uuid4())
     # Fetch model from settings
     try:
-        conn = sqlite3.connect("agent_memory.db")
+        conn = sqlite3.connect("/data/agent_memory.db")
         c = conn.cursor()
         c.execute("SELECT model FROM settings WHERE id = 1")
         row = c.fetchone()
@@ -203,7 +208,7 @@ def start_new_session() -> tuple[str, ConversationSummaryMemory]:
     finally:
         conn.close()
     memory = ConversationSummaryMemory(llm=initialize_llm(model_string), prompt = FORMATTED_PROMPT)
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("INSERT INTO sessions (session_id, start_time) VALUES (?, ?)",
               (session_id, datetime.now().isoformat()))
@@ -277,7 +282,7 @@ def process_query(session_id: str, query: str, memory: ConversationSummaryMemory
     thread_local.session_id = session_id # Initialize thread_local session_id for hold session.
 
     # Open a new database connection
-    db = sqlite3.connect("agent_memory.db", check_same_thread=False)
+    db = sqlite3.connect("/data/agent_memory.db", check_same_thread=False)
     db.row_factory = sqlite3.Row
     try:
         # Fetch model from settings
@@ -322,7 +327,7 @@ def process_query(session_id: str, query: str, memory: ConversationSummaryMemory
 # Get session history
 def get_session_history(session_id: str) -> Dict[str, Any]:
     """Retrieve the history of workflows and steps for a given session."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     conn.row_factory = sqlite3.Row  # Enable column name access
     c = conn.cursor()
     

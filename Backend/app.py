@@ -13,8 +13,6 @@ from utils.system_utils import get_os_and_kernel
 from pathlib import Path
 from utils.codeserver import start_code_server
 from tools.terminal_events import terminal_events
-from tools.shell_tool import shell_manager
-from tools.user_shell import user_shell_manager
 from utils.service_utils import appview_queues, check_running_services
 app = Flask(__name__)
 CORS(app)
@@ -32,7 +30,7 @@ from agent import start_new_session, process_query, get_session_history
 def get_db():
     """Get a database connection, reusing it within the request context."""
     if 'db' not in g:
-        g.db = sqlite3.connect("agent_memory.db", check_same_thread=False)
+        g.db = sqlite3.connect("/data/agent_memory.db", check_same_thread=False)
         g.db.row_factory = sqlite3.Row
     return g.db
 
@@ -49,7 +47,7 @@ def update_system_settings():
     # --- Create workspace directory ---
     try:
         # Path.home() gets the user's home directory (~/ on Linux, C:\Users\<user> on Windows)
-        workspace_path = Path.home() / "workspace"
+        workspace_path = Path("/app/workspace")
         
         # Create the directory. exist_ok=True prevents an error if it already exists.
         workspace_path.mkdir(exist_ok=True)
@@ -64,7 +62,7 @@ def update_system_settings():
 
     # --- Original database update logic ---
     os_name, kernel_version = get_os_and_kernel()
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("UPDATE settings SET os = ?, kernel_version = ? WHERE id = 1", (os_name, kernel_version))
     conn.commit()

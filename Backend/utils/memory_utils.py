@@ -14,7 +14,7 @@ def load_session_memory(session_id: str) -> ConversationSummaryMemory:
     model_string = "together/Qwen/Qwen2.5-Coder-32B-Instruct"
     memory = ConversationSummaryMemory(llm=initialize_llm(model_string))
     logger.info(f"Memory from conversationSummeryMemory as : {memory}")
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("SELECT summary FROM memory WHERE session_id = ?", (session_id,))
     result = c.fetchone()
@@ -29,7 +29,7 @@ def load_session_memory(session_id: str) -> ConversationSummaryMemory:
 
 def save_memory(session_id: str, memory: ConversationSummaryMemory) -> None:
     """Save memory summary to the database."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("INSERT OR REPLACE INTO memory (session_id, summary, last_updated) VALUES (?, ?, ?)",
               (session_id, memory.buffer, datetime.now().isoformat()))

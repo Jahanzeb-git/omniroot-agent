@@ -39,7 +39,7 @@ def read_file(input_str: str) -> str:
     file_path = file_path.strip()
     file_path = os.path.expanduser(file_path)
     if not os.path.isabs(file_path):
-        default_dir = os.path.expanduser('~/workspace')
+        default_dir = "/app/workspace"
         file_path = os.path.join(default_dir, file_path)
     file_path = os.path.normpath(file_path)
 
@@ -130,7 +130,7 @@ def write_file(input_str: str) -> str:
         
         # Set default directory if not provided
         if directory is None or directory == "":
-            directory = os.path.expanduser("~/workspace")
+            directory = "/app/workspace"
             logger.info(f"Using default workspace directory: {directory}")
         elif not isinstance(directory, str):
             logger.error(f"Invalid directory type: {type(directory)}")
@@ -219,7 +219,7 @@ def write_file(input_str: str) -> str:
             
             # Construct success message
             user_home = os.path.expanduser("~")
-            default_workspace = os.path.join(user_home, "workspace")
+            default_workspace = os.path.join(user_home, "/app/workspace")
             if directory == default_workspace:
                 result = f"Successfully created '{file_name}' in default workspace directory ({directory})"
             else:

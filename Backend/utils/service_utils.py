@@ -18,7 +18,7 @@ def get_pid_by_port(port):
 
 def add_or_update_server(port, pid):
     """Add or update a server in the running_servers table."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     timestamp = time.time()
     c.execute("INSERT OR REPLACE INTO running_servers (port, pid, timestamp) VALUES (?, ?, ?)", (port, pid, timestamp))
@@ -27,7 +27,7 @@ def add_or_update_server(port, pid):
 
 def set_current_frontend(port, pid):
     """Set the current frontend in the current_frontend table."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     timestamp = time.time()
     c.execute("INSERT OR REPLACE INTO current_frontend (id, port, pid, timestamp) VALUES (1, ?, ?, ?)", (port, pid, timestamp))
@@ -36,7 +36,7 @@ def set_current_frontend(port, pid):
 
 def notify_appview_update():
     """Notify all clients of the current AppView state."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("SELECT port, pid, timestamp FROM running_servers")
     servers = [{'port': row[0], 'pid': row[1], 'timestamp': row[2]} for row in c.fetchall()]
@@ -56,7 +56,7 @@ def check_running_services():
     """Periodically check and update the status of running services."""
     while True:
         time.sleep(5)
-        conn = sqlite3.connect("agent_memory.db")
+        conn = sqlite3.connect("/data/agent_memory.db")
         c = conn.cursor()
         c.execute("SELECT port, pid FROM running_servers")
         servers = c.fetchall()

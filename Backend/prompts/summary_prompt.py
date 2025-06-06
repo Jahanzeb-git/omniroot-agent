@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 # Custom summarization prompt
 # Fetch summarization percentage from settings
 try:
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("SELECT summarization_percentage FROM settings WHERE id = 1")
     row = c.fetchone()

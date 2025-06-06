@@ -22,7 +22,7 @@ def initialize_llm(model_string: str) -> Union[ChatOpenAI, ChatLiteLLM]:
             raise ValueError("Both provider and model must be non-empty")
 
         # Load API keys from database
-        conn = sqlite3.connect("agent_memory.db")
+        conn = sqlite3.connect("/data/agent_memory.db")
         c = conn.cursor()
         c.execute("SELECT openai_api_key, anthropic_api_key, google_api_key, together_api_key, llm_temperature, llm_max_tokens, llm_timeout FROM settings WHERE id = 1")
         row = c.fetchone()

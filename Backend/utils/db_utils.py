@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 def init_db():
     """Initialize SQLite database with required tables."""
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS sessions
                  (session_id TEXT PRIMARY KEY, start_time TEXT)''')

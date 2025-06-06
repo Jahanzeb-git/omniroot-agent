@@ -10,8 +10,14 @@ LABEL maintainer="jahanzebahmed.mail@gmail.com"
 RUN apt-get update -qq \
  && apt-get install -y -q curl gnupg build-essential \
  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+ && curl -fsSL https://code-server.dev/install.sh | sh \
  && apt-get install -y nodejs \
  && rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user and directories
+RUN useradd -ms /bin/bash omniroot \
+ && mkdir -p /app/workspace /data \
+ && chown omniroot:omniroot /app/workspace /data
 
 # Set working directory
 WORKDIR /app
@@ -43,22 +49,30 @@ WORKDIR /app/Frontend
 RUN npm install \
  && npm run build
 
-################################################################################
-# 5) Expose ports for Flask (5001) and Frontend static server (5173)            #
-################################################################################
-
-EXPOSE 5001 5173
+# Set ownership to non-root user
+RUN chown -R omniroot:omniroot /app
 
 ################################################################################
-# 6) Copy entrypoint script (to launch both processes) and make it executable  #
+# 5) Copy entrypoint script BEFORE switching user and make it executable       #
 ################################################################################
 
-WORKDIR /app
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ################################################################################
-# 7) Default command runs entrypoint.sh                                        #
+# 6) Switch to non-root user AFTER setting permissions                         #
+################################################################################
+
+USER omniroot
+
+################################################################################
+# 7) Expose ports for Flask (5001) and Frontend static server (5173)            #
+################################################################################
+
+EXPOSE 5001 5173 8080
+
+################################################################################
+# 8) Default command runs entrypoint.sh                                        #
 ################################################################################
 
 CMD ["/entrypoint.sh"]

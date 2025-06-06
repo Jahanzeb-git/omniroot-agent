@@ -16,8 +16,8 @@ from tools.terminal_events import terminal_events
 class ShellToolManager:
     def __init__(self):
         self.thread_local = threading.local()
-        self.db_path = "agent_memory.db"
-        self.workspace_dir = os.path.expanduser("~/workspace")
+        self.db_path = "/data/agent_memory.db" # Explicit Path in container...
+        self.workspace_dir = "/app/workspace"
         self.sudo_password = "ubuntu@2002"
         self.max_db_retries = 2
         self.logs_dir = os.path.join(self.workspace_dir, "logs")

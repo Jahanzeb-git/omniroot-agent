@@ -6,16 +6,17 @@ import logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-def start_code_server(workspace_path="~/workspace", port=8080):
+def start_code_server(workspace_path="/app/workspace", port=8080):
     """
     Starts code-server in the specified workspace directory.
 
     Args:
-        workspace_path (str): Path to the workspace directory (default: ~/workspace).
+        workspace_path (str): Path to the workspace directory (default: /app/workspace).
         port (int): Port to run code-server on (default: 8080).
     """
+    logger.info(f"Attempting to start code-server with workspace_path: {workspace_path}")
     # Expand the tilde (~) to the full home path
-    full_path = os.path.expanduser(workspace_path)
+    full_path = os.path.abspath(workspace_path)
 
     # Ensure the directory exists
     if not os.path.isdir(full_path):
@@ -23,17 +24,17 @@ def start_code_server(workspace_path="~/workspace", port=8080):
 
     try:
         subprocess.Popen(
-            ["code-server", "--bind-addr", f"127.0.0.1:{port}", full_path],
+            ["code-server", "--bind-addr", f"0.0.0.0:{port}", "--auth", "none", full_path],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             stdin=subprocess.DEVNULL,
             start_new_session=True
         )
-        print(f"code-server started on http://127.0.0.1:{port} in {full_path}")
+        print(f"code-server started on http://0.0.0.0:{port} in {full_path}")
         logger.info("code server successfully started.")
     except FileNotFoundError:
         print("code-server is not installed or not in PATH.")
-        logging.info("code-server is not installed or not in PATH")
+        logger.error("code-server is not installed or not in PATH")
     except Exception as e:
         print(f"Failed to start code-server: {e}")
-        logging.info("Failed to start code-server")
+        logger.error(f"Failed to start code-server: {e}")
