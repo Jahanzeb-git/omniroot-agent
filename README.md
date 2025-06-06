@@ -6,12 +6,13 @@
 [![LangChain](https://img.shields.io/badge/LangChain-121212?style=for-the-badge&logo=chainlink&logoColor=white)](https://langchain.com/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Version](https://img.shields.io/badge/version-v1.3.0-blue?style=for-the-badge)](https://github.com/Jahanzeb-git/omniroot-agent)
 
-> **⚠️ SECURITY NOTICE**: This agent operates with **ROOT-level system access** and can execute **ANY system commands**. Use only in **isolated environments** and at your **own risk**. Not recommended for production systems.
+> **🛡️ SECURE CONTAINERIZED ENVIRONMENT**: This agent operates within a secure Docker container with isolated access to its own environment. Safe for development and testing without compromising host system security.
 
 ## 🎯 Overview
 
-**Omniroot Agent** is a sophisticated, containerized Agentic AI application built with LangChain and LiteLLM that provides autonomous system-level task execution with multi-LLM support. Designed specifically for Linux environments, this agent combines the power of multiple AI models with direct OS access to solve complex computational tasks, development workflows, and system administration challenges.
+**Omniroot Agent** is a sophisticated, containerized Agentic AI application built with LangChain and LiteLLM that provides autonomous task execution with multi-LLM support. Designed for secure development environments, this agent combines the power of multiple AI models with containerized access to solve complex coding tasks, development workflows, and automation challenges.
 
 ## 🖼️ Application Preview
 
@@ -23,17 +24,18 @@
 
 ### 🧠 **Multi-LLM Intelligence Hub**
 - **OpenAI Models**: GPT-4, GPT-o1, GPT-o1-mini, GPT-o3
-- **Anthropic Claude**: Claude 3.5 Sonnet, Claude 4 Opus, Claude 4 Sonnet
+- **Anthropic Claude**: Claude 3.5 Sonnet, Claude 3.7 Sonnet, Claude 4 Opus, Claude 4 Sonnet
 - **Google Gemini**: Gemini 2.5 Pro, Gemini 1.5 Pro
-- **Open Source**: Together AI's Qwen 2.5 Coder Instruct 32B, Qwen 3
+- **Open Source**: Together AI's Qwen 2.5 Coder Instruct 32B, Qwen 3, Deepseek V3
 - **Extensible**: Easy integration of additional models via LiteLLM
 
-### 🔐 **Root-Level System Access**
-- Full filesystem read/write operations
-- Direct shell command execution with kernel-level access
-- System service management and process control
-- Network configuration and monitoring capabilities
-- Hardware resource inspection and control
+### 🔐 **Containerized Development Environment**
+- Secure isolated container environment
+- Full filesystem operations within container scope
+- Shell command execution with container-level access
+- Project creation and development server management
+- File editing and code manipulation capabilities
+- No host system access - maintains security boundaries
 
 ### 💾 **Advanced Memory Management**
 - **Contextual Memory Condensation**: Custom algorithm using LangChain's ConversationSummaryMemory
@@ -42,10 +44,10 @@
 - **Workflow State Management**: Maintains task context and execution state
 
 ### 🖥️ **Integrated Development Environment**
-- **VS Code Web Interface**: Full-featured code editor accessible via browser
+- **VS Code Web Interface**: Full-featured code editor accessible via browser (Port 8080)
 - **Live Terminal Access**: Real-time command execution with streaming output
 - **Development Servers**: Instant preview and testing of web applications
-- **File System Browser**: Navigate and manage files with GUI interface
+- **Frontend Preview**: Live preview tabs for development projects
 
 ### 🔄 **Real-Time Communication**
 - **Server-Sent Events (SSE)**: Streaming responses and real-time updates
@@ -54,34 +56,35 @@
 - **Event-Driven Architecture**: Asynchronous task execution and status updates
 
 ### 🛠️ **Custom Tool Ecosystem**
-- **Shell Tool**: Direct OS command execution with safety validations
-- **File Tools**: Advanced read/write operations with permissions handling
+- **Shell Tool**: Container-level command execution with safety validations
+- **File Tools**: Advanced read/write operations within container environment
 - **Email Tool**: SMTP integration for notifications and reporting
-- **System Tools**: Process management, service control, and resource monitoring
+- **Development Tools**: Project scaffolding, server management, and code analysis
 - **Extensible Framework**: Easy integration of custom tools and capabilities
 
 ### 🚨 **Intelligent Safety Systems**
 - **Dynamic Prompting**: Adaptive prompt engineering based on execution context
-- **Threat Detection**: Built-in warnings for potentially dangerous operations
-- **Command Validation**: Pre-execution safety checks and user confirmations
-- **Risk Assessment**: Automated evaluation of command impact and safety
+- **Command Validation**: Pre-execution safety checks and confirmations
+- **Container Isolation**: Secure boundaries preventing host system access
+- **Risk Assessment**: Automated evaluation of command impact within container scope
 
 ## 🏗️ System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           Omniroot Agent Container                          │
+│                        Omniroot Agent Container (v1.3.0)                   │
 ├─────────────────────┬───────────────────────────────────────────────────────┤
 │    Frontend Layer   │                 Backend Layer                         │
 │   (React/TypeScript)│               (Python/FastAPI)                        │
 │     Port: 5173      │                Port: 5001                             │
 ├─────────────────────┼───────────────────────────────────────────────────────┤
 │ • VS Code Web IDE   │ • LangChain Agent Engine                              │
-│ • Terminal Interface│ • Multi-LLM Router (LiteLLM)                          │
-│ • Real-time Chat UI │ • Memory Condensation Layer                           │
-│ • Session Management│ • SSE Streaming Server                                │
-│ • File Browser      │ • WebSocket Event Handler                             │
+│   (Port: 8080)      │ • Multi-LLM Router (LiteLLM)                          │
+│ • Terminal Interface│ • Memory Condensation Layer                           │
+│ • Real-time Chat UI │ • SSE Streaming Server                                │
+│ • Session Management│ • WebSocket Event Handler                             │
 │ • Settings Panel    │ • REST API Endpoints                                  │
+│ • Preview Tabs      │ • Development Server Manager                          │
 └─────────────────────┴───────────────────────────────────────────────────────┘
                                         │
         ┌───────────────────────────────┼───────────────────────────────────┐
@@ -95,27 +98,27 @@
  │      │      │            │         │         │                    │     │     │
 ▼      ▼      ▼            ▼         ▼         ▼                    ▼     ▼     ▼
 OpenAI  Claude  Gemini    Shell    File     Email              Context Summary Session
-GPT-4   Sonnet  Pro      Tool     Tools    Tool               Memory  Engine  Store
+GPT-4   Models  Pro      Tool     Tools    Tool               Memory  Engine  Store
 Together.AI     │         │        │        │                   │       │       │
-Qwen Models     │         │        │        │                   │       │       │
+Deepseek V3     │         │        │        │                   │       │       │
                 │         │        │        │                   │       │       │
                 ▼         ▼        ▼        ▼                   ▼       ▼       ▼
            ┌─────────────────────────────────────────────────────────────────────┐
-           │                    Host System Access                               │
-           │  • Root FS: /hostroot    • Workspace: /workspace                   │
-           │  • Shell Commands        • File Operations                         │
-           │  • Process Control       • Network Access                          │
-           │  • Kernel Interface      • Service Management                      │
+           │                Container Environment Access                         │
+           │  • Container FS: /app/workspace  • File Operations                  │
+           │  • Shell Commands              • Development Servers               │
+           │  • Process Control             • Project Management                │
+           │  • Secure Boundaries           • Code Execution                    │
            └─────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Communication Flow
 1. **Frontend** sends requests via REST API or WebSocket
 2. **Backend** processes through LangChain agent with selected LLM
-3. **Tools Engine** executes system operations with safety checks
+3. **Tools Engine** executes operations within container environment
 4. **Memory Manager** condenses and stores conversation context
 5. **SSE Stream** delivers real-time updates to frontend
-6. **Host System** provides direct access to OS resources
+6. **Container Environment** provides isolated access to development resources
 
 ## 📁 Project Structure
 
@@ -128,7 +131,7 @@ Omniroot-agent/
 │   │   ├── agent_prompt.py      # Dynamic agent system prompts
 │   │   └── summary_prompt.py    # Memory condensation prompts
 │   ├── tools/
-│   │   ├── shell_tool.py        # OS command execution with safety
+│   │   ├── shell_tool.py        # Container command execution
 │   │   ├── file_tools.py        # File system read/write operations
 │   │   ├── email_tool.py        # SMTP email integration
 │   │   ├── terminal_events.py   # Terminal WebSocket handling
@@ -137,8 +140,8 @@ Omniroot-agent/
 │   │   ├── llm_utils.py         # LLM provider management
 │   │   ├── memory_utils.py      # Context optimization algorithms
 │   │   ├── db_utils.py          # Session and data persistence
-│   │   ├── system_utils.py      # OS integration utilities
-│   │   ├── service_utils.py     # System service management
+│   │   ├── system_utils.py      # Container integration utilities
+│   │   ├── service_utils.py     # Development service management
 │   │   ├── extract_utils.py     # Data extraction and parsing
 │   │   └── codeserver.py        # VS Code server integration
 │   ├── watchers/
@@ -164,31 +167,47 @@ Omniroot-agent/
 ### Prerequisites
 
 - **Docker**: Version 20.0+ with BuildKit support
-- **Linux Host**: Ubuntu 20.04+ or equivalent (required for privileged access)
-- **Available Ports**: 5001 (Backend API) and 5173 (Frontend UI)
+- **Available Ports**: 5001 (Backend API), 5173 (Frontend UI), 8080 (VS Code)
 - **API Keys**: For your chosen LLM providers
-- **Minimum RAM**: 4GB available (8GB+ recommended for larger models)
+- **System Requirements**: Minimum 4GB RAM, 2GB available disk space
 
 ### One-Command Installation
 
 ```bash
-# Pull and run with all required privileges and mounts
-docker run -d -p 5173:5173 -p 5001:5001 jahanzeb833/omniroot-agent:latest
+# Pull and run the latest version
+docker run -d --name omniroot-agent -p 5173:5173 -p 5001:5001 -p 8080:8080 jahanzeb833/omniroot-agent:latest
 ```
 
 ### Alternative: Docker Compose (Recommended)
 
 ```bash
-# Create a workspace directory
-mkdir -p ~/omniroot-workspace
-cd ~/omniroot-workspace
+# Create project directory
+mkdir omniroot-agent && cd omniroot-agent
 
+# Download docker-compose.yml
+curl -O https://raw.githubusercontent.com/Jahanzeb-git/omniroot-agent/main/docker-compose.yml
+
+# Start the application
+docker-compose up -d
+```
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone git@github.com:Jahanzeb-git/omniroot-agent.git
+cd omniroot-agent
+
+# Build and run locally
+docker-compose up --build
+```
 
 ### Access the Application
 
 ```
 🌐 Frontend Interface: http://localhost:5173
 🔗 Backend API: http://localhost:5001
+💻 VS Code IDE: http://localhost:8080
 ```
 
 ## ⚙️ Configuration
@@ -226,31 +245,7 @@ cd ~/omniroot-workspace
 
 6. **Save Configuration** and refresh the page
 
-### Environment Variables
-
-| Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
-| `HOME` | Host user home directory | `/hostroot/home/$USER` | Yes |
-| `USER` | Current user context | `$USER` | Yes |
-| `BACKEND_PORT` | Backend server port | `5001` | No |
-| `FRONTEND_PORT` | Frontend server port | `5173` | No |
-| `LOG_LEVEL` | Logging verbosity | `INFO` | No |
-| `MAX_MEMORY_MB` | Agent memory limit | `2048` | No |
-
 ## 💡 Usage Examples
-
-### System Administration
-```
-User: "Check disk usage and clean up old log files older than 30 days"
-
-Agent: I'll analyze your disk usage and safely clean up old log files.
-
-🔍 Checking disk usage...
-📊 Current usage: /dev/sda1 85% full
-🧹 Found 2.3GB of log files older than 30 days
-✅ Safely removed 127 old log files
-💾 Freed up 2.3GB of disk space
-```
 
 ### Development Workflow
 ```
@@ -258,25 +253,74 @@ User: "Create a new React TypeScript project with Tailwind CSS and start develop
 
 Agent: I'll set up a complete React TypeScript project with Tailwind CSS.
 
-📁 Creating project structure...
+📁 Creating project structure in /app/workspace...
 📦 Installing dependencies...
 🎨 Configuring Tailwind CSS...
-🚀 Starting development server on http://localhost:3000
-✅ Project ready for development!
+🚀 Starting development server on port 3000
+✅ Project ready! Access it via the Preview tab or VS Code IDE
+```
+
+### File Management & Coding
+```
+User: "Create a Python FastAPI application with user authentication"
+
+Agent: I'll create a FastAPI application with authentication features.
+
+📝 Creating project structure...
+🔐 Setting up JWT authentication...
+📊 Adding user management endpoints...
+🧪 Creating test files...
+⚙️ Configuring environment variables...
+✅ FastAPI application ready! Run with: uvicorn main:app --reload
 ```
 
 ### Multi-Step Automation
 ```
-User: "Monitor system performance and send email alerts if CPU usage exceeds 80% for more than 5 minutes"
+User: "Analyze this CSV file and create a dashboard with charts"
 
-Agent: I'll create a monitoring system with email notifications.
+Agent: I'll analyze your CSV data and create an interactive dashboard.
 
-📊 Setting up performance monitoring...
-⚙️ Creating monitoring script...
-📧 Configuring email alerts...
-⏰ Setting up cron job for continuous monitoring...
-✅ Monitoring system active - you'll receive alerts at your configured email
+📊 Reading and analyzing CSV data...
+📈 Generating statistical insights...
+🎨 Creating React dashboard with charts...
+📱 Setting up responsive design...
+🚀 Starting dashboard server...
+✅ Dashboard ready at http://localhost:3001
 ```
+
+## 📊 Performance Metrics
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| **Container Startup Time** | 15-30 seconds | Initial container initialization |
+| **LLM Response Time** | 1-10 seconds | Varies by model complexity and API latency |
+| **Memory Usage** | 1-4 GB | Depends on active projects and context size |
+| **Container Size** | ~2 GB | Includes all dependencies and tools |
+| **Concurrent Operations** | 5-10 | Per container instance |
+| **Context Retention** | 85-95% | With memory condensation enabled |
+| **File Operations** | <500ms | For standard read/write operations |
+| **Development Server Start** | 2-10 seconds | Varies by project type and size |
+
+### Performance Notes
+- **Response times vary significantly based on chosen LLM model**
+- **GPT-4 and Claude models typically provide faster responses than GPT-o1 series**
+- **Open-source models via Together AI may have higher latency**
+- **Memory condensation helps maintain performance in long conversations**
+
+## 🛡️ Security & Safety
+
+### Container Security Model
+- **Isolated Environment**: All operations occur within the secure Docker container
+- **No Host Access**: Container cannot access or modify host system files
+- **Network Isolation**: Limited network access based on container configuration
+- **Process Isolation**: Container processes are isolated from host processes
+- **Resource Limits**: Configurable CPU and memory limits prevent resource exhaustion
+
+### Safe for Development
+- **File Operations**: Limited to container workspace directory
+- **Command Execution**: Restricted to container environment
+- **Network Operations**: Outbound API calls only (for LLM providers)
+- **No Privilege Escalation**: Standard user permissions within container
 
 ## 🔧 Advanced Usage
 
@@ -287,16 +331,16 @@ Agent: I'll create a monitoring system with email notifications.
 from langchain.tools import BaseTool
 from typing import Optional
 
-class DatabaseTool(BaseTool):
+class CustomDatabaseTool(BaseTool):
     name = "database_query"
-    description = "Execute SQL queries on the database"
+    description = "Execute database queries within container"
     
     def _run(self, query: str) -> str:
         # Your custom tool implementation
         return result
 ```
 
-### Memory Condensation Tuning
+### Memory Configuration
 
 ```python
 # Adjust memory condensation behavior
@@ -308,88 +352,6 @@ MEMORY_CONFIG = {
 }
 ```
 
-### Custom Prompt Engineering
-
-```python
-# Dynamic prompt modification based on context
-SYSTEM_PROMPT_TEMPLATE = """
-You are Omniroot Agent with {access_level} system access.
-Current context: {context_summary}
-Available tools: {tool_list}
-Safety mode: {safety_level}
-
-Guidelines:
-- Always validate commands before execution
-- Provide detailed explanations for complex operations
-- Ask for confirmation for potentially destructive actions
-"""
-```
-
-## 🛡️ Security Considerations
-
-### ⚠️ Critical Security Warnings
-
-This agent operates with **unprecedented system access**:
-
-- **ROOT PRIVILEGES**: Complete administrative control over the host system
-- **KERNEL ACCESS**: Direct interaction with system kernel and hardware
-- **FILESYSTEM ACCESS**: Read/write access to all files including system files
-- **NETWORK CONTROL**: Ability to modify network settings and make external connections
-- **PROCESS CONTROL**: Can start, stop, and manage any system process
-- **SERVICE MANAGEMENT**: Full control over system services and daemons
-
-### Recommended Security Measures
-
-#### 1. **Isolation Strategies**
-```bash
-# Run in isolated network
-docker network create --driver bridge isolated_net
-docker run --network isolated_net jahanzeb833/omniroot-agent:latest
-
-# Limit resource access
-docker run --memory=4g --cpus=2 jahanzeb833/omniroot-agent:latest
-
-# Read-only root filesystem (where possible)
-docker run --read-only --tmpfs /tmp jahanzeb833/omniroot-agent:latest
-```
-
-#### 2. **Volume Restrictions**
-```bash
-# Limit mounted volumes to specific directories
-docker run \
-  -v /home/user/safe-workspace:/workspace \
-  -v /var/log:/hostroot/var/log:ro \
-  jahanzeb833/omniroot-agent:latest
-```
-
-#### 3. **Monitoring and Logging**
-```bash
-# Enable comprehensive logging
-docker run \
-  --log-driver=json-file \
-  --log-opt max-size=100m \
-  --log-opt max-file=5 \
-  jahanzeb833/omniroot-agent:latest
-```
-
-#### 4. **Network Security**
-```bash
-# Bind to localhost only
-docker run -p 127.0.0.1:5173:5173 -p 127.0.0.1:5001:5001 \
-  jahanzeb833/omniroot-agent:latest
-```
-
-### Production Deployment Considerations
-
-⚠️ **This agent is NOT recommended for production environments** due to its extensive system access requirements. If you must deploy in production:
-
-1. **Use dedicated, isolated virtual machines**
-2. **Implement comprehensive audit logging**
-3. **Set up real-time security monitoring**
-4. **Restrict network access to essential services only**
-5. **Regular security assessments and penetration testing**
-6. **Backup and disaster recovery procedures**
-
 ## 🔍 Troubleshooting
 
 ### Common Issues
@@ -397,10 +359,7 @@ docker run -p 127.0.0.1:5173:5173 -p 127.0.0.1:5001:5001 \
 #### Container Fails to Start
 ```bash
 # Check if ports are available
-sudo netstat -tulpn | grep -E ':(5173|5001)'
-
-# Verify Docker daemon is running
-sudo systemctl status docker
+netstat -tulpn | grep -E ':(5173|5001|8080)'
 
 # Check container logs
 docker logs omniroot-agent
@@ -409,72 +368,28 @@ docker logs omniroot-agent
 docker system df
 ```
 
-#### Permission Denied Errors
-```bash
-# Ensure container has privileged access
-docker inspect omniroot-agent | grep Privileged
-
-# Check volume mount permissions
-ls -la /hostroot/
-```
-
-#### API Connection Issues
-```bash
-# Test backend connectivity
-curl -X GET http://localhost:5001/health
-
-# Check frontend build
-docker exec omniroot-agent ls -la /app/Frontend/dist/
-```
-
 #### LLM Provider Issues
 - **Verify API key format and validity**
 - **Check rate limits and billing status**
 - **Ensure model availability in your region**
-- **Test with different temperature settings**
+- **Test with different models if one fails**
 
-#### Memory and Performance Issues
+#### Performance Issues
 ```bash
 # Monitor container resources
 docker stats omniroot-agent
 
-# Check memory usage patterns
-docker exec omniroot-agent cat /proc/meminfo
-
-# Adjust memory limits
-docker update --memory=8g omniroot-agent
+# Restart container if needed
+docker restart omniroot-agent
 ```
 
 ### Debug Mode
 
-Enable detailed logging for troubleshooting:
+Enable detailed logging:
 
 ```bash
-docker run \
-  -e LOG_LEVEL=DEBUG \
-  -e PYTHON_ENV=development \
-  jahanzeb833/omniroot-agent:latest
+docker run -e LOG_LEVEL=DEBUG jahanzeb833/omniroot-agent:latest
 ```
-
-## 📊 Performance Metrics
-
-| Metric | Value | Notes |
-|--------|-------|-------|
-| **Cold Start Time** | 15-30 seconds | Initial container startup |
-| **LLM Response Time** | 1-5 seconds | Varies by model and complexity |
-| **Memory Usage** | 2-8 GB | Depends on model and context size |
-| **Concurrent Sessions** | 5-15 | Per container instance |
-| **Context Retention** | 85-95% | With memory condensation enabled |
-| **Command Execution** | <1 second | For most shell operations |
-| **File Operations** | <500ms | For standard read/write operations |
-
-### Optimization Tips
-
-- **Use GPT-4 for complex reasoning, Claude for coding tasks**
-- **Enable memory condensation for long conversations**
-- **Adjust temperature to 0.1 for consistent agent behavior**
-- **Monitor memory usage and restart container if needed**
-- **Use SSD storage for better file operation performance**
 
 ## 🛠️ Development & Contribution
 
@@ -482,7 +397,7 @@ docker run \
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/your-username/omniroot-agent.git
+   git clone git@github.com:Jahanzeb-git/omniroot-agent.git
    cd omniroot-agent
    ```
 
@@ -492,7 +407,6 @@ docker run \
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
-   export FLASK_ENV=development
    python app.py
    ```
 
@@ -506,160 +420,56 @@ docker run \
 4. **Build and Test**
    ```bash
    docker build -t omniroot-agent:dev .
-   docker run -d -p 5173:5173 -p 5001:5001 --privileged omniroot-agent:dev
+   docker run -d -p 5173:5173 -p 5001:5001 -p 8080:8080 omniroot-agent:dev
    ```
 
 ### Contributing Guidelines
 
-We welcome contributions! Here are the priority areas:
+We welcome contributions! Priority areas include:
 
-#### 🎯 **High Priority Areas**
-
-**Shell Tool Enhancement**
-- Cross-platform command compatibility
-- Advanced safety validation mechanisms
-- Interactive command prompting and confirmation
-- Command history and replay functionality
-- Shell session state management
-
-**Memory System Improvements**
-- More efficient condensation algorithms
-- Custom memory strategies for different use cases
-- Long-term memory persistence across sessions
-- Context-aware memory prioritization
-
-**Security Hardening**
-- Command sandboxing mechanisms
-- Role-based access control
-- Audit logging and compliance features
-- Threat detection and prevention
-
-#### 🔧 **Other Contribution Areas**
-- Additional LLM provider integrations (Cohere, AI21, etc.)
-- Custom tool development framework
-- Performance optimization and caching
-- Enhanced error handling and recovery
-- Comprehensive test suite expansion
-- Documentation improvements and tutorials
+- **Enhanced LLM integrations and optimizations**
+- **Additional development tools and frameworks**
+- **Performance improvements and caching**
+- **UI/UX enhancements**
+- **Documentation and tutorials**
+- **Bug fixes and stability improvements**
 
 ### Development Workflow
 
 1. **Fork** the repository on GitHub
 2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
 3. **Develop** your changes with tests
-4. **Test** thoroughly in isolated environment
-5. **Document** your changes and update README if needed
-6. **Commit** with descriptive messages (`git commit -m 'Add amazing feature'`)
-7. **Push** to your branch (`git push origin feature/amazing-feature`)
-8. **Create** a Pull Request with detailed description
-
-### Code Standards
-
-- **Python**: Follow PEP 8, use type hints, comprehensive docstrings
-- **TypeScript**: Strict mode, proper typing, ESLint compliance
-- **Testing**: Unit tests for all new functionality
-- **Security**: Input validation, sanitization, and security reviews
-- **Documentation**: Update README, code comments, and API docs
-
-### Testing Requirements
-
-```bash
-# Backend tests
-cd Backend
-python -m pytest tests/ -v --coverage
-
-# Frontend tests
-cd Frontend
-npm run test
-npm run test:e2e
-
-# Integration tests
-docker-compose -f docker-compose.test.yml up --abort-on-container-exit
-```
-
-## 📈 Roadmap
-
-### Version 2.0 (Q3 2025)
-- [ ] **Multi-Agent Orchestration**: Deploy and coordinate multiple specialized agents
-- [ ] **Visual Workflow Builder**: Drag-and-drop interface for complex task automation
-- [ ] **Advanced Security Sandbox**: Isolated execution environments with fine-grained permissions
-- [ ] **Cloud Provider Integration**: Native AWS, GCP, Azure service integrations
-- [ ] **Real-time Collaboration**: Multi-user sessions with conflict resolution
-
-### Version 1.5 (Q2 2025)
-- [ ] **Enhanced Shell Tools**: Improved command validation and cross-platform support
-- [ ] **Plugin Architecture**: Extensible framework for custom tool development
-- [ ] **Performance Dashboard**: Real-time metrics, monitoring, and analytics
-- [ ] **Backup & Recovery**: Automated session backup and restoration
-- [ ] **Mobile Interface**: Responsive design for tablet and mobile access
-
-### Version 1.2 (Current)
-- [x] **Multi-LLM Support**: OpenAI, Anthropic, Google, Together AI integration
-- [x] **Memory Condensation**: Advanced context management and optimization
-- [x] **VS Code Integration**: Full-featured web-based IDE
-- [x] **Real-time Communication**: SSE streaming and WebSocket support
-- [x] **Docker Distribution**: Automated builds and Docker Hub distribution
+4. **Test** thoroughly in container environment
+5. **Document** your changes
+6. **Commit** with descriptive messages
+7. **Push** to your branch
+8. **Create** a Pull Request
 
 ## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Copyright (c) 2024 Omniroot Agent Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ## 🙏 Acknowledgments
 
-- **LangChain** for the powerful and flexible agent framework
-- **LiteLLM** for seamless multi-provider LLM integration and standardization
-- **FastAPI** for high-performance async API development
-- **React & TypeScript** for modern, type-safe frontend development
-- **Docker** for containerization and deployment simplification
+- **LangChain** for the powerful agent framework
+- **LiteLLM** for seamless multi-provider LLM integration
+- **FastAPI** for high-performance API development
+- **React & TypeScript** for modern frontend development
+- **Docker** for containerization and deployment
 - **VS Code** for the integrated development environment
-- **Open Source Community** for continuous inspiration, feedback, and contributions
+- **Open Source Community** for continuous inspiration and contributions
 
 ## 📞 Support & Community
 
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/your-username/omniroot-agent/issues)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/your-username/omniroot-agent/discussions)
-- **📖 Documentation**: [Wiki](https://github.com/your-username/omniroot-agent/wiki)
-- **📧 Email**: support@omniroot-agent.com
-- **🐦 Twitter**: [@OmnirootAgent](https://twitter.com/omnirootagent)
-- **💬 Discord**: [Join our community](https://discord.gg/omniroot-agent)
+- **🐛 Bug Reports**: [GitHub Issues](https://github.com/Jahanzeb-git/omniroot-agent/issues)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/Jahanzeb-git/omniroot-agent/discussions)
+- **📖 Documentation**: [Wiki](https://github.com/Jahanzeb-git/omniroot-agent/wiki)
 
-### FAQ
+### Development Status
 
-**Q: Can I run this on Windows or macOS?**
-A: The container can run on Docker Desktop for Windows/macOS, but some privileged operations may not work as expected. Linux is recommended for full functionality.
+**Current Version**: v1.3.0 (Beta)
 
-**Q: How much does it cost to run?**
-A: The container itself is free. You only pay for LLM API usage based on your chosen providers and usage patterns.
-
-**Q: Is my data secure?**
-A: All processing happens locally in your container. No data is sent to external services except for LLM API calls. Use API keys with appropriate restrictions.
-
-**Q: Can I add custom tools?**
-A: Yes! The agent supports custom tool development. See the development section for guidelines.
+This is a beta release suitable for development and testing. While stable for most use cases, some bugs may exist. Performance depends on chosen LLM model and API response times.
 
 ---
 
@@ -667,16 +477,16 @@ A: Yes! The agent supports custom tool development. See the development section 
 
 **⭐ Star this repository if you find it useful!**
 
-**🤝 Contributions are always welcome and highly appreciated!**
+**🤝 Contributions are welcome and appreciated!**
 
-**🔐 Always use responsibly and in secure environments!**
+**🔐 Secure containerized environment for safe development!**
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/omniroot-agent.svg?style=social&label=Star)](https://github.com/your-username/omniroot-agent)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/omniroot-agent.svg?style=social&label=Fork)](https://github.com/your-username/omniroot-agent/fork)
+[![GitHub stars](https://img.shields.io/github/stars/Jahanzeb-git/omniroot-agent.svg?style=social&label=Star)](https://github.com/Jahanzeb-git/omniroot-agent)
+[![GitHub forks](https://img.shields.io/github/forks/Jahanzeb-git/omniroot-agent.svg?style=social&label=Fork)](https://github.com/Jahanzeb-git/omniroot-agent/fork)
 [![Docker Pulls](https://img.shields.io/docker/pulls/jahanzeb833/omniroot-agent.svg)](https://hub.docker.com/r/jahanzeb833/omniroot-agent)
 
 </div>
 
 ---
 
-> **⚠️ Disclaimer**: Omniroot Agent is a powerful tool that requires responsible usage. The developers assume no responsibility for any damage, data loss, or security breaches resulting from improper use. Always follow security best practices, use in isolated environments, and ensure you understand the implications of granting root-level system access to an AI agent. This software is provided "as-is" without warranties of any kind.
+> **💡 Note**: Omniroot Agent v1.3.0 operates within a secure containerized environment, making it safe for development and testing without compromising host system security. This beta release is suitable for coding projects, automation tasks, and AI-assisted development workflows.
