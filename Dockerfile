@@ -6,9 +6,24 @@ FROM python:3.12-slim AS build-env
 # (Optional) Metadata
 LABEL maintainer="jahanzebahmed.mail@gmail.com"
 
-# Install tools needed to add NodeSource and build native modules
+# Install tools needed to add NodeSource, build native modules, and essential commands
 RUN apt-get update -qq \
- && apt-get install -y -q curl gnupg build-essential \
+ && apt-get install -y -q \
+    curl \
+    gnupg \
+    build-essential \
+    lsof \
+    tree \
+    coreutils \
+    procps \
+    net-tools \
+    grep \
+    bash \
+    debianutils \
+    findutils \
+    git \
+    wget \
+    sudo \
  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
  && curl -fsSL https://code-server.dev/install.sh | sh \
  && apt-get install -y nodejs \

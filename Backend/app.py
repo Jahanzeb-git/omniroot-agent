@@ -14,6 +14,7 @@ from pathlib import Path
 from utils.codeserver import start_code_server
 from tools.terminal_events import terminal_events
 from utils.service_utils import appview_queues, check_running_services
+from utils.file_upload_handler import handle_file_upload
 app = Flask(__name__)
 CORS(app)
 
@@ -318,6 +319,35 @@ def appview_events_stream():
         except GeneratorExit:
             appview_queues.remove(queue)
     return Response(generate(), mimetype='text/event-stream')
+
+
+# File Uploading endpoint..
+@app.route('/api/file_upload', methods=['POST'])
+def upload_files():
+    """Handle multiple file uploads."""
+    try:
+        if 'files' not in request.files:
+            return jsonify({
+                'success': False,
+                'error': 'No files provided in request',
+                'uploaded_files': []
+            }), 400
+        
+        files = request.files.getlist('files')
+        result = handle_file_upload(files)
+        
+        if result['success']:
+            return jsonify(result), 200
+        else:
+            return jsonify(result), 400
+            
+    except Exception as e:
+        logger.error(f"File upload endpoint error: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': f'Server error during upload: {str(e)}',
+            'uploaded_files': []
+        }), 500
 
 
 

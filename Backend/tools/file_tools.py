@@ -7,6 +7,7 @@ import logging
 from thread_storage import thread_local
 from watchers.file_watcher import start_watching
 from utils.extract_utils import extract_action_input
+from utils.file_converter import convert_file_to_text, is_convertible_file
 
 # Configure logging for step-related events
 logging.basicConfig(
@@ -77,6 +78,21 @@ def read_file(input_str: str) -> str:
         logger.error(f"Cannot access file: {str(e)}")
         return f"Error: Cannot access file '{file_path}': {str(e)}."
 
+    # Check if file needs conversion (PDF/DOCX)
+    if is_convertible_file(file_path):
+        logger.info(f"Converting file to text: {file_path}")
+        converted_content = convert_file_to_text(file_path)
+        if converted_content and not converted_content.startswith("Error:"):
+            result = f"[Converted from {os.path.splitext(file_path)[1].upper()} to text]\n\n{converted_content}"
+            if warning:
+                result += warning
+            return result
+        elif converted_content:
+            # Conversion failed, return the error
+            return converted_content
+        # If conversion returns None, fall through to try reading as text
+
+    # Original text file reading logic
     max_retries = 3
     for attempt in range(max_retries):
         try:

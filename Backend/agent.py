@@ -126,7 +126,7 @@ tools = [
     Tool(
         name="ReadFile",
         func=read_file,
-        description="Retrieves file content from '~/workspace' unless an absolute path is given. Input must be a JSON string, e.g., '{\"file_path\": \"test.txt\"}'. Use relative paths (e.g., 'test.txt') for '~/workspace'; absolute paths (e.g., '/other/file.txt') for other locations. Returns content or error if file is invalid, >10MB, or inaccessible."
+        description="Retrieves file content from '~/workspace' unless an absolute path is given. Input must be a JSON string, e.g., '{\"file_path\": \"test.txt\"}'. Use relative paths (e.g., 'test.txt') for '~/workspace'; absolute paths (e.g., '/other/file.txt') for other locations. Returns content or error if file is invalid, >10MB, or inaccessible. PDF and DOCX files also supported to read in TXT."
     ),
     Tool(
         name="WriteFile",

@@ -76,7 +76,7 @@ def load_config() -> Dict[str, Any]:
     Raises:
         EmailConfigError: If configuration is invalid or missing
     """
-    conn = sqlite3.connect("agent_memory.db")
+    conn = sqlite3.connect("/data/agent_memory.db")
     c = conn.cursor()
     c.execute("SELECT smtp_email, smtp_password, smtp_host, smtp_port, timeout, use_tls FROM settings WHERE id = 1")
     row = c.fetchone()
@@ -272,6 +272,7 @@ def send_email_smtp(input_str: str) -> str:
         Success message or error message starting with 'Error:'
     """
     logger.info("Starting email send process")
+    smtp_server = None
     
     try:
         action_input, warning = extract_action_input(input_str)
@@ -387,7 +388,6 @@ def send_email_smtp(input_str: str) -> str:
         except Exception as e:
             return f"Error: Unexpected error creating message: {str(e)}"
     
-        smtp_server = None
         try:
             logger.info(f"Connecting to SMTP server {config['smtp_host']}:{config['smtp_port']}")
             smtp_server = smtplib.SMTP(

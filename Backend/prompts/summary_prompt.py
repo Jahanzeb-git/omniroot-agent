@@ -29,6 +29,7 @@ Summarize the conversation to approximately {summarization_percentage}% of its o
 - Tools used (e.g., WriteFile, ShellTool, EmailTool, ReadFile) and their actions (e.g., 'wrote to sort_function.py', 'ran python3 sort_function.py').
 - Key operations (e.g., 'changed > to < in bubble sort', 'output: [90, 64, 34]').
 - Any PIDs Noted.(Must include PID context.)
+Write the Summary as LLMs can easily understand 100% context without being hellucinated.
 
 Goal: Maximize context retention and minimize token usage based on the summarization percentage.
 
