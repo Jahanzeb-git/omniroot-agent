@@ -176,6 +176,10 @@ Omniroot-agent/
 ```bash
 # Pull and run the latest version
 docker run -d --name omniroot-agent -p 5173:5173 -p 5001:5001 -p 8080:8080 jahanzeb833/omniroot-agent:latest
+# Stop the container
+docker stop omniroot-agent
+# Start the container again
+docker start omniroot-agent
 ```
 
 ### Alternative: Docker Compose (Recommended)
